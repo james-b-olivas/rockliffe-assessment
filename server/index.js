@@ -39,6 +39,7 @@ app.get('/folders/:folderName', (req, res) => {
   fs.readdir(folderPath, (err, files) => {
     if (err) throw err;
     else {
+      console.log(files);
       res.send(files);
     }
   });
