@@ -10,9 +10,12 @@
         <div class="col-md-6">
             <!-- Get the files from current folder and parse it -->
             List of files in current folder:
-            <li v-for="file in files" v-bind:key="file.id">
+            <li v-for="file in files" v-bind:key="file.id" @click="onFileClick(file)">
                 {{file}}
             </li>
+        </div>
+        <div>
+            <PDFViewer />
         </div>
     </div>
 </template>
@@ -20,7 +23,11 @@
 <script>
     const API_URL = 'http://localhost:4000/folders';
     import { emitter } from "../event-bus.js";
+    import PDFViewer from "./PDFViewer.vue";
     export default {
+        components: {
+            PDFViewer
+        },
         data() {
             return {
                 folders: Array,
@@ -28,6 +35,11 @@
                 files: Array
             }
         },
+        // props: {
+        //     folders: Array,
+        //     currentFolder: String,
+        //     files: Array
+        // },
         mounted() {
             fetch(API_URL)
                 .then(response => response.json())
@@ -39,6 +51,12 @@
             emitter.on("folder-clicked", (response) => {
                 this.files = response;
             });
+            emitter.on("update-current-folder", (folder) => {
+                this.currentFolder = folder;
+            });
+            emitter.on("file-clicked", (file) => {
+                console.log('File clicked:', file, this.currentFolder);
+            });
         },
         methods: {
             onFolderClick: (folder) => {
@@ -48,7 +66,11 @@
                     .then(response => response.json())
                     .then(response => {
                         emitter.emit("folder-clicked", response);
+                        emitter.emit("update-current-folder", folder);
                     })
+            },
+            onFileClick: (file) => {
+                emitter.emit("file-clicked", file);
             }
         }
     }
