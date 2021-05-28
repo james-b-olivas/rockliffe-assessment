@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/folders', (req, res) => {
-  const folderPath = path.join(__dirname, '../test-folders');
+  const folderPath = path.join(__dirname, '../client/public/test-folders');
   fs.readdir(folderPath, (err, folders) => {
     if (err) {
       throw err;
@@ -35,7 +35,7 @@ app.get('/folders', (req, res) => {
 });
 
 app.get('/folders/:folderName', (req, res) => {
-  const folderPath = path.join(__dirname, '../test-folders', req.params.folderName);
+  const folderPath = path.join(__dirname, '../client/public/test-folders', req.params.folderName);
   fs.readdir(folderPath, (err, files) => {
     if (err) throw err;
     else {

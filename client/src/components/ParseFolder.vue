@@ -14,8 +14,8 @@
                 {{file}}
             </li>
         </div>
-        <div>
-            <PDFViewer />
+        <div v-if="this.hasSelectedFile === true">
+            <PDFViewer v-bind:filePath="this.currentFolder.concat('/', this.currentFile)"/>
         </div>
     </div>
 </template>
@@ -32,7 +32,9 @@
             return {
                 folders: Array,
                 currentFolder: String,
-                files: Array
+                files: Array,
+                currentFile: '',
+                hasSelectedFile: Boolean
             }
         },
         // props: {
@@ -41,6 +43,7 @@
         //     files: Array
         // },
         mounted() {
+            this.hasSelectedFile = false;
             fetch(API_URL)
                 .then(response => response.json())
                 .then(response => {
@@ -55,7 +58,8 @@
                 this.currentFolder = folder;
             });
             emitter.on("file-clicked", (file) => {
-                console.log('File clicked:', file, this.currentFolder);
+                this.currentFile = file;
+                this.hasSelectedFile = true;
             });
         },
         methods: {
@@ -66,7 +70,7 @@
                     .then(response => response.json())
                     .then(response => {
                         emitter.emit("folder-clicked", response);
-                        emitter.emit("update-current-folder", folder);
+                        emitter.emit("update-current-folder", splitFolder[splitFolder.length - 2] + '/' + folderName);
                     })
             },
             onFileClick: (file) => {
