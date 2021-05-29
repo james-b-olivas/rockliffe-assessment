@@ -9,6 +9,7 @@
             @num-pages="pageCount = $event"
             @page-loaded="currentPage = $event"
         ></pdf>
+        {{currentPage}} / {{pageCount}}
     </div>
     <div>
         <v-btn @click="prevPageClick($event)">Previous page</v-btn>
@@ -37,11 +38,9 @@ export default {
     methods: {
         prevPageClick() {
             if (this.currentPage > 1) this.currentPage--;
-            console.log('Current page:', this.currentPage);
         },
         nextPageClick() {
             if (this.currentPage < this.pageCount) this.currentPage++;
-            console.log('Current page:', this.currentPage);
         }
     }
 }

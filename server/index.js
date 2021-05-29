@@ -22,7 +22,6 @@ app.get('/folders', (req, res) => {
     if (err) {
       throw err;
     } else {
-      console.log(folders);
       let filePaths = [];
       for (let i = 0; i < folders.length; i++) {
         if (folders[i] !== '.DS_Store') {
@@ -39,10 +38,25 @@ app.get('/folders/:folderName', (req, res) => {
   fs.readdir(folderPath, (err, files) => {
     if (err) throw err;
     else {
-      console.log(files);
       res.send(files);
     }
   });
+});
+
+app.get('/folders/:folderName/:fileName', (req, res) => {
+  const filePath = path.join(__dirname, '../client/public/test-folders', req.params.folderName, req.params.fileName);
+  // const file = fs.createReadStream(filePath);
+  // res.setHeader('Content-Type', 'application/pdf');
+  // res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
+  // file.pipe(res);
+  fs.readFile(filePath, (err, file) => {
+    if (err) throw err;
+    else {
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
+      res.send(file);
+    }
+  })
 });
 
 const port = process.env.PORT || 4000;
