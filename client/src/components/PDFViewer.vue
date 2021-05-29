@@ -37,11 +37,9 @@ export default {
     methods: {
         prevPageClick() {
             if (this.currentPage > 1) this.currentPage--;
-            console.log('Current page:', this.currentPage);
         },
         nextPageClick() {
             if (this.currentPage < this.pageCount) this.currentPage++;
-            console.log('Current page:', this.currentPage);
         }
     }
 }
