@@ -41,15 +41,15 @@ export default {
         pdf
     },
     props: {
-        filePath: String
+        filePath: String,
+        currentPage: Number
     },
     data() {
         return {
             src: undefined,
             // src: "test-folders/folder3/lorem-ipsum.pdf",
             // numPages: undefined,
-            pageCount: 0,
-            currentPage: 1
+            pageCount: 0
         }
     },
     mounted() {

@@ -10,12 +10,19 @@
         <div class="col-md-6">
             <!-- Get the files from current folder and parse it -->
             List of files in current folder:
-            <li v-for="file in files" v-bind:key="file.id" @click="onFileClick(file)">
+            <li v-for="file in files" v-bind:key="file.id" v-bind:currentPage=1 @click="onFileClick(file)">
                 {{file}}
             </li>
         </div>
         <div v-if="this.hasSelectedFile === true" style="margin-left: 50px; width: 70%">
             <PDFViewer v-bind:filePath="this.currentFolder.concat('/', this.currentFile)"/>
+        </div>
+        <div
+            v-if="this.hasSelectedFile === true"
+            style="margin-left: 50px; margin-top: 1%; margin-bottom: 1%; width: 70%"
+            @click="homeButtonClick()"
+        >
+            <v-btn>Home</v-btn>
         </div>
     </div>
 </template>
@@ -31,17 +38,12 @@
         data() {
             return {
                 folders: Array,
-                currentFolder: String,
+                currentFolder: '',
                 files: Array,
                 currentFile: '',
                 hasSelectedFile: Boolean
             }
         },
-        // props: {
-        //     folders: Array,
-        //     currentFolder: String,
-        //     files: Array
-        // },
         mounted() {
             this.hasSelectedFile = false;
             fetch(API_URL)
@@ -52,14 +54,22 @@
         },
         created() {
             emitter.on("folder-clicked", (response) => {
+                this.hasSelectedFile = false;
                 this.files = response;
             });
             emitter.on("update-current-folder", (folder) => {
                 this.currentFolder = folder;
             });
             emitter.on("file-clicked", (file) => {
+                this.hasSelectedFile = false;
                 this.currentFile = file;
                 this.hasSelectedFile = true;
+            });
+            emitter.on("home-button-clicked", () => {
+                this.currentFolder = '';
+                this.files = [];
+                this.currentFile = '';
+                this.hasSelectedFile = false;
             });
         },
         methods: {
@@ -75,6 +85,9 @@
             },
             onFileClick: (file) => {
                 emitter.emit("file-clicked", file);
+            },
+            homeButtonClick: () => {
+                emitter.emit("home-button-clicked");
             }
         }
     }
