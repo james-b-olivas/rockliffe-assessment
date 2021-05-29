@@ -14,7 +14,7 @@
                 {{file}}
             </li>
         </div>
-        <div v-if="this.hasSelectedFile === true">
+        <div v-if="this.hasSelectedFile === true" style="margin-left: 50px; width: 70%">
             <PDFViewer v-bind:filePath="this.currentFolder.concat('/', this.currentFile)"/>
         </div>
     </div>
