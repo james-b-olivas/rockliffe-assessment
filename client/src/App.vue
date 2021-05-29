@@ -38,25 +38,18 @@
     </v-app-bar>
 
     <v-main>
-      <!-- <HelloWorld/> -->
       <ParseFolder/>
-
-      <!-- <VuePDFExample/> -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld';
-// import VuePDFExample from './components/VuePDFExample';
 import ParseFolder from './components/ParseFolder';
 
 export default {
   name: 'App',
 
   components: {
-    // HelloWorld,
-    // VuePDFExample,
     ParseFolder
   },
 
