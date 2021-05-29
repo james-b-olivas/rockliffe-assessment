@@ -9,6 +9,7 @@
             @num-pages="pageCount = $event"
             @page-loaded="currentPage = $event"
         ></pdf>
+        {{currentPage}} / {{pageCount}}
     </div>
     <div>
         <v-btn @click="prevPageClick($event)">Previous page</v-btn>
