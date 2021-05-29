@@ -10,7 +10,9 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "path": "^0.12.7",
     "vue": "^2.6.11",
+    "vue-pdf": "^4.2.0",
     "vue-router": "^3.5.1",
     "vuetify": "^2.4.0"
   },
