@@ -1,22 +1,24 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <!-- Get the folder and parse it -->
+            <!-- Get all the folders in the directory -->
             List of folders:
             <li v-for="folder in folders" v-bind:key="folder.id" @click="onFolderClick(folder, $event)">
                 {{folder}}
             </li>
         </div>
         <div class="col-md-6">
-            <!-- Get the files from current folder and parse it -->
+            <!-- Get the files from selected folder and display them -->
             List of files in current folder:
             <li v-for="file in files" v-bind:key="file.id" v-bind:currentPage=1 @click="onFileClick(file)">
                 {{file}}
             </li>
         </div>
+        <!-- Display PDF, but only if a folder and file have been selected -->
         <div v-if="this.hasSelectedFile === true" style="margin-left: 50px; width: 70%">
             <PDFViewer v-bind:filePath="this.currentFolder.concat('/', this.currentFile)"/>
         </div>
+        <!-- Create "Home" button that resets selected file and folder, and also stops PDF from being displayed -->
         <div
             v-if="this.hasSelectedFile === true"
             style="margin-left: 50px; margin-top: 1%; margin-bottom: 1%; width: 70%"
