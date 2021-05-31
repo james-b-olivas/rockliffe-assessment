@@ -45,10 +45,6 @@ app.get('/folders/:folderName', (req, res) => {
 
 app.get('/folders/:folderName/:fileName', (req, res) => {
   const filePath = path.join(__dirname, '../client/public/test-folders', req.params.folderName, req.params.fileName);
-  // const file = fs.createReadStream(filePath);
-  // res.setHeader('Content-Type', 'application/pdf');
-  // res.setHeader('Content-Disposition', 'attachment; filename=quote.pdf');
-  // file.pipe(res);
   fs.readFile(filePath, (err, file) => {
     if (err) throw err;
     else {
