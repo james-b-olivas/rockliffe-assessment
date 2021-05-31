@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    const API_URL = 'http://localhost:4000/folders';
+    const API_URL = 'http://54.215.250.16:4000/folders';
     import { emitter } from "../event-bus.js";
     import PDFViewer from "./PDFViewer.vue";
     import axios from "axios";
