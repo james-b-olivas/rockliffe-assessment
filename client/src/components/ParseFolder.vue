@@ -1,15 +1,21 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div
+            class="col-md-6"
+            style="margin-left: 30px; margin-top: 1%; margin-bottom: 1%; width: 70%"
+        >
             <!-- Get all the folders in the directory -->
             List of folders:
             <li v-for="folder in folders" v-bind:key="folder.id" @click="onFolderClick(folder, $event)">
                 {{folder.split('/').reverse()[0]}}
             </li>
         </div>
-        <div class="col-md-6">
+        <div
+            class="col-md-6"
+            style="margin-left: 30px; margin-top: 1%; margin-bottom: 1%; width: 70%"
+        >
             <!-- Get the files from selected folder and display them -->
-            List of files in current folder:
+            List of files in selected folder: {{this.currentFolderPath.split('/')[1]}}
             <li v-for="file in files" v-bind:key="file.id" v-bind:currentPage=1 @click="onFileClick(file)">
                 {{file}}
             </li>
@@ -29,7 +35,7 @@
         <!-- Create "Home" button that resets selected file and folder, and also stops PDF from being displayed -->
         <div
             v-if="this.hasSelectedFile === true"
-            style="margin-left: 50px; margin-top: 1%; margin-bottom: 1%; width: 70%"
+            style="margin-left: 50px; margin-bottom: 1%; width: 70%"
             @click="homeButtonClick()"
         >
             <v-btn>Home</v-btn>
@@ -104,7 +110,6 @@
             onFolderClick: (folder) => {
                 let splitFolder = folder.split('/');
                 let folderName = splitFolder[splitFolder.length - 1];
-                console.log(`${API_URL}/${folderName}`);
                 fetch(`${API_URL}/${folderName}`)
                     .then(response => response.json())
                     .then(response => {

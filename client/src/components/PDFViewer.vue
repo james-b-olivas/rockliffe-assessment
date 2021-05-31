@@ -2,17 +2,21 @@
 <div>
 
     <div>
-        {{currentPage}} / {{pageCount}}
+        Page {{currentPage}} / {{pageCount}}
+        <div style="margin-bottom: 2px">
+            <v-btn @click="prevPageClick($event)" style="margin-right: 5px">Previous page</v-btn>
+            <v-btn @click="nextPageClick($event)">Next page</v-btn>
+        </div>
         <pdf
             :src="this.filePath"
             :page="this.currentPage"
             @num-pages="pageCount = $event"
             @page-loaded="currentPage = $event"
         ></pdf>
-        {{currentPage}} / {{pageCount}}
+        Page {{currentPage}} / {{pageCount}}
     </div>
     <div>
-        <v-btn @click="prevPageClick($event)">Previous page</v-btn>
+        <v-btn @click="prevPageClick($event)" style="margin-right: 5px">Previous page</v-btn>
         <v-btn @click="nextPageClick($event)">Next page</v-btn>
     </div>
 </div>
