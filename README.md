@@ -1,5 +1,5 @@
 # rockliffe-assessment
-My submission for the Rockliffe internship's take-home test.
+My submission for the Rockliffe internship's take-home assessment.
 
 ## Requirements
 
@@ -29,7 +29,7 @@ The app comes with multiple folders that each contain PDF files.
 
 Click on a folder name to view the files contained within, and then click on a file name to display the PDF.
 
-You can do the following with the PDF:
-* Toggle between pages of a PDF with the "Previous Page" and "Next Page" buttons.
+You can do the following with the displayed PDF:
+* Toggle between pages with the "Previous Page" and "Next Page" buttons.
 * Download the PDF with the "Download File" button.
 * Stop viewing the PDF by clicking the "Home" button.
