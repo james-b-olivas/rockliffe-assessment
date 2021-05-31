@@ -4,7 +4,7 @@
             <!-- Get all the folders in the directory -->
             List of folders:
             <li v-for="folder in folders" v-bind:key="folder.id" @click="onFolderClick(folder, $event)">
-                {{folder}}
+                {{folder.split('/').reverse()[0]}}
             </li>
         </div>
         <div class="col-md-6">
